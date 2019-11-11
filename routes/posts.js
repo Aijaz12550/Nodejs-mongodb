@@ -94,13 +94,6 @@ setTimeout(()=>{
    })
 
 
-
-//    router.post('/updatePost',verifyToken,(req,res)=>{
-//        const id = req.body.id
-//        const post_to_update = new Post.update({_id:id},{$set:{volunteers:[{id:'aijaz'}]}})
-
-//    })
-
 router.post('/updatePost',verifyToken,(req,res)=>{
     const id =req.body.id
     const  volunteer = req.body.volunteer;
