@@ -1,12 +1,5 @@
 {
-  "type": "service_account",
-  "project_id": "push-mesa",
-  "private_key_id": "89209d2abcc96bc85ba4dafca88271be82d5e596",
-  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQC8UcjOK2InfKAx\nWTUz2EXo1l7wrlOHTM2b9jzsEuRYDtWXKgijJAqIaV/De9gTu6adLu7JqojO2xoa\nMnT4ABidhQCC22c3rouYQ2NV1T6syNiv4qXae+E6oOnzE8+WS27QFu/EXzS18E3o\nS/xZ+QPPHvDKrH0VaR4BCI49BYVLIztKYKj9Q3gvvJO7/WRq6d84ItrpBz6C/DG7\nk1PrThZajMcoxBHQZ2JahLXQaXQKPR9n7Nm3/ZTh6jVlzQOckD/ZOucZNDdwhzeh\nmC41qBdlzKOxK5457Bo7rv2SeeuaRzkH0YO9A8xoNCLi1ZcDiIsmVu4r1QBhNxld\nSs8fCVLlAgMBAAECggEAV/qXZyZifVMeXd+w2M9F3eDkyumOcWvitOXFkX7D+hW4\nGJ6VGW55k0AzcpbVnGZzEQT/nuySbJ105N9EwSX+Wfzsf7Xz01IyukhlTJDK7psI\njKdE170/PI43rg3H0g3cr8+/ZU0bSZKCOy/grcIF0wo/8VfDOjD5SP9PwFdnbfGy\npl7xKMOjxlMM+hALPjkJRHHMNUuiqzABqxo2yvmbuR1vLd1zxYGF9jknB2FuDhG+\nkkziQA5jTCbSeGrRLneMNQdI95q3jeWQ9cSQEKY+5zzAJGqk9wyaO1CsdlbLUfzw\nHGDF0NEiaO0LTl+EQAE7hHlM/Z9m39CH4BWXMIpaAwKBgQDqVI6botmYo1h7nrGW\ngDfgN6vJ2XDZcd1Z7qCJ52GRzNV4/P//RTOhOUexGVH1HrFD++9q/oyBV16ZmBEV\ngkcmqvU86FP3vi+AsWZE6nTJVD0T0qqq+nBl7/JbMSqg2V1at/PtdBOa6ckAfguK\nTUaaA+h0b9+FiW00PMoC6gmlgwKBgQDNu/wwNq77kCFCpricVi01ENGyakdk3Q7M\niX7By26byIxsHTy3Kxu2QynAhU4f2lhCP3Vbc8ZXWbb6L/nmBfp2tXcGfuOO/DnE\nEAam1S3VA8wCsUrJgL8KAv6z0lBV+NO+ZyLHX3nzemJ0FWjB4PVi5Uu1ttJjRmVf\n7WqRKtKhdwKBgFxdB/kAr5QijnXrj0QrNdsDFotxUbHj18Pi8xRoR2UYv+v4jU8p\nD7i0wzVjLZLYjjalzzD1NJymu3r/HXzE5RawvAlN6gr0w/SN+Cmh4Haa5ZgyqWLL\nZBJKCdU4A/1ysAFaEKO/5Rpim/+9rv7Mhs+eSrnaftg72veEHnwXk8XRAoGAB2Ys\nYruEvY1odNI0L4M16wOo1wbVfH4qyxZi1atwVe/3hOfkSB4nx/1QYhkpPyIGLJPF\nr71RM9EJMKRLE4fBg0Vxe21S19Cgbzm4U4W1OUUCsFIaA3c656xF5se4le72BpIF\nATCg3S3Ynp4qf1aM3LqsZ2Ok22crvDB4tbHZk28CgYEApzXQLClY5mODGt/C9CTD\nDVFpvGL/2VFGL3PacQiEv3DVti65IxQtNtC9/Y3J5Zfdeo02AIdCMhkpN8ehGSJX\nrh7/doxNwm4sOQq4R1y/i7ElEeZ+ZCoUMNUY376gK/TE8WSr4WflXPqwwv8gu7Sq\nrAf7XDxDkirs+1TVgdXmJJk=\n-----END PRIVATE KEY-----\n",
-  "client_email": "firebase-adminsdk-lt9dx@push-mesa.iam.gserviceaccount.com",
-  "client_id": "101121381349786861777",
-  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
-  "token_uri": "https://oauth2.googleapis.com/token",
-  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
-  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-lt9dx%40push-mesa.iam.gserviceaccount.com"
+/*
+your server key file.........
+*/
 }
