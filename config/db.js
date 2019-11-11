@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const mongoURI = "mongodb+srv://aijaz:aijaz@cluster0-ywqrk.mongodb.net/campusRS?retryWrites=true&w=majority"
+const mongoURI = "mongodb+srv://name:password@cluster0-ywqrk.mongodb.net/<databaseName>?retryWrites=true&w=majority"
 
 mongoose.connect(mongoURI);
 
