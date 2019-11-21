@@ -4,43 +4,6 @@ const Post = require('../models/Posts')
 const Users = require('../models/Users');
 const verifyToken = require('../middlewares/verifyToken')
 
-// router.get('/getAllPosts', (req, res) => {
-//     const Posts = Post.find();
-//     Post.then(data=>{
-//         res.send({result:data})
-//     }).catch(er=>{
-//         res.send({result:er.message})
-//     })
-   
-// })
-
-
-/*
-PUSH NOTIFICATION_________START
-*/
-var admin = require("firebase-admin");
-
-var serviceAccount = require("../serverKey.json");
-
-admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
-  databaseURL: "https://push-mesa.firebaseio.com"
-});
-
-
-var options = {
-    priority : 'high',
-    timeToLive : 60 * 60 * 24,
-   
-}
-
-// admin.messaging().sendToDevice(token, payload , options)
-// .then(responce => console.log('notification sent'.responce))
-// .catch(err => console.log('error----->>',err))
-
-/*
-PUSH NOTIFICATION_________END
-*/
 
 router.get('/getAllPosts',verifyToken,(req, res) => {
     const Posts= Post.find();
@@ -59,34 +22,6 @@ router.post('/addPost', verifyToken, (req, res) => {
    
        newPost.save().then(() => {
 
-        // push notification.........
-           let pushData = Users.find({notification:true},{fcmToken:'all'})
-           pushData.then(dt=>{
-               var tokens = []
-               for(var i=0;i<dt.length;i++){
-                   tokens.push(dt[i].fcmToken)
-               }
-               console.log('fcm data>>>>>>',tokens)
-
-                          var payload ={
-                                  notification :{
-                                  title:'Blood Required',
-                                   body:`at ${req.body.hospital} hospital in ${req.body.urgency}`,
-                                   sound: "default",
-                                   vibration:'default'
-                                
-                                   
-                                        }
-                                 }
-setTimeout(()=>{
-
-    admin.messaging().sendToDevice(tokens, payload , options)
-    .then(responce => console.log('notification sent',responce))
-    .catch(err => console.log('error----->>',err))
-},4000)
-
-
-           })
            res.send({result: "Post added successfully"})
        }).catch(e => {
            res.send({message: e.message});

@@ -4,8 +4,8 @@ const bcryptjs = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
 const UsersSchema = new Schema({
-    fName: String,
-    lName: String,
+    name: String,
+    
     email: {
         type: String,
         required: true,
@@ -17,13 +17,27 @@ const UsersSchema = new Schema({
         type: String,
         required: true,
     },
-    // address: String,
-    // age: Number,
-    // friendIds: Array,
-    bloodGroup:String,
-    token: String,
-    fcmToken:String,
-    notification:Boolean,
+    type:{
+        type:String,
+        required:true
+    },
+    token:String,
+    cv:{
+        name:String,
+        des:String,
+        degree:String,
+        year:String,
+        skills:String,
+        experience:[{
+            duration:String,
+            designation:String,
+            organization:String,
+        }]
+    },
+    myjobs:[{
+        jobId:String,
+    }]
+    
 })
 
 UsersSchema.methods.comparePassword = function (password) {
@@ -62,6 +76,6 @@ UsersSchema.pre("save", function (next) {
     next();
 })
 
-const Users = mongoose.model('Users', UsersSchema);
+const users = mongoose.model('Users', UsersSchema);
 
-module.exports = Users;
+module.exports = users;

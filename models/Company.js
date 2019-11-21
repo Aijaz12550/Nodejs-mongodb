@@ -1,38 +1,54 @@
-const mongo = require('mongoose')
-const Schema = mongo.Schema
-const bcrypt = require('bcryptjs')
-const jwt = require('jsonwebtoken')
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
-const CompanySchema = Schema({
-    user:{
-        name:String,
-        email:{
-            type:String,
-            required:true,
-            unique:true
-        },
-        password:{
-            type:String,
-            required:true,
-        }
-    }
+const CompanySchema = new Schema({
+    companyName :String,
+    service:String,
+    totalEmployees:Number,
+    location:String,
+    description:String,
+    ownerId:String,
+    timestamp:String,
+
+    closeJobs:[{id:String,ownerId:String}],
+    activeJobs:[{
+        type: Schema.Types.ObjectId,
+        ref: "Jobs"
+    }]
 })
 
 
-// password encryption........
-CompanySchema.methods.comparePassword = function (password){
-    const user = this
-    return bcrypt.compareSync(password, user.password)
-}
+// ---------------------------JOBS SCHEMA------------------
 
-// generate token
-CompanySchema.methods.generateToken = async function ( ){
-    const user = this;
-    const token = jwt.sign({_id:user._id}, "aijaz", {})
-    user.token = token
+const JobSchema = new Schema({
+   
+        
+            timestamp:String,
+            cId:String,
+            title:String,
+            required_qualification:String,
+            experience:String,
+            skills:String,
+            positions:String,
+            job_type:String,
+            salary:String,
+            job_responsibility:String,
+ 
+        applications:[{
+            applicant_id:String,
+            status:String,
+        }],
 
-    await user.save()
-    return;
-}
+        actions:[
+            {_id:Schema.Types.ObjectId,action:Boolean}
+        ],
 
-// 
+        hired:[{_id:String,timestamp:String}]
+
+ 
+})
+
+const Jobs = mongoose.model('Jobs',JobSchema)
+const Company = mongoose.model('Company', CompanySchema);
+
+module.exports = {Company,Jobs};

@@ -1,11 +1,11 @@
 const express = require('express');
 const router = express.Router();
-const Users = require('../models/Users');
+const users = require('../models/Users');
 const verifyToken = require('../middlewares/verifyToken');
 
 //protected route
 router.get('/getAll', verifyToken, (req, res) => {
-    const users = Users.find();
+    const users = users.find();
 
     users.then((allUsers) => {
         res.send({result: allUsers})
@@ -16,7 +16,7 @@ router.get('/getAll', verifyToken, (req, res) => {
 
 router.post('/register', (req, res) => {
     const userInfo = req.body;
-    const user = new Users(userInfo);
+    const user = new users(userInfo);
 
     user.save().then((response) => {
         res.send({result: "Registered Successfully!"+response})
@@ -29,7 +29,7 @@ router.post('/login', async (req, res) => {
     const userInfo = req.body;
 
     //check email
-    const user = await Users.findOne({email: userInfo.email});
+    const user = await users.findOne({email: userInfo.email});
 
     if(!user) {
         res.send({message: "Invalid email or password!"});
@@ -44,9 +44,9 @@ router.post('/login', async (req, res) => {
 
     //generate token
     await user.generateToken();
-    await Users.update({email:userInfo.email},{$set:{notification:true}})
+    // await users.update({email:userInfo.email},{$set:{notification:true}})
 
-    res.send({_id: user._id, email: user.email, token: user.token, bloodGroup:user.bloodGroup,name:user.fName});
+    res.send({_id: user._id, email: user.email, token: user.token, name:user.name,type:user.type});
 
 
     // user.then((userObj) => {
@@ -98,5 +98,20 @@ router.post('/logout',(req,res)=>{
         res.send({message:e.message})
     })
 })
+
+
+// ------------------------------Add CV
+router.post('/addcv',verifyToken,(req,res) => {
+    const id = req.body.id
+    const cv = req.body.cv
+    users.updateOne({_id:id},{$set:{cv}})
+    .then( data => {
+        res.send({ result:"CV Added"})
+    }).catch( e=>{
+        res.send({ error:e.message})
+    })
+})
+
+// ---------------------------------end
 
 module.exports = router;
