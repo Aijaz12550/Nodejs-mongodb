@@ -22,23 +22,38 @@ const UsersSchema = new Schema({
         required:true
     },
     token:String,
-    cv:{
-        name:String,
-        des:String,
-        degree:String,
-        year:String,
-        skills:String,
-        experience:[{
-            duration:String,
-            designation:String,
-            organization:String,
-        }]
-    },
     myjobs:[{
-        jobId:String,
+        type:Schema.Types.ObjectId,
+        ref:'Jobs'
+    }],
+    savedJobs:[{
+        type:Schema.Types.ObjectId,
+        ref:'Jobs'
     }]
+
     
 })
+
+
+
+// ----------------------------------------------------------CV
+
+const CvSchema = new Schema({
+    _id:Schema.Types.ObjectId,
+    name:String,
+    des:String,
+    degree:String,
+    year:String,
+    skills:String,
+    experience:[{
+        duration:String,
+        designation:String,
+        organization:String,
+    }]
+})
+
+
+
 
 UsersSchema.methods.comparePassword = function (password) {
     const user = this;
@@ -76,6 +91,10 @@ UsersSchema.pre("save", function (next) {
     next();
 })
 
-const users = mongoose.model('Users', UsersSchema);
 
-module.exports = users;
+
+const Cv = mongoose.model('Cv',CvSchema)
+
+const Users = mongoose.model('Users', UsersSchema);
+
+module.exports = {Users,Cv};

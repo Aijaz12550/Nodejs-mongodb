@@ -1,11 +1,11 @@
 const express = require('express');
 const router = express.Router();
-const users = require('../models/Users');
+const {Users,Cv} = require('../models/Users');
 const verifyToken = require('../middlewares/verifyToken');
 
 //protected route
 router.get('/getAll', verifyToken, (req, res) => {
-    const users = users.find();
+    const users = Users.find();
 
     users.then((allUsers) => {
         res.send({result: allUsers})
@@ -16,7 +16,7 @@ router.get('/getAll', verifyToken, (req, res) => {
 
 router.post('/register', (req, res) => {
     const userInfo = req.body;
-    const user = new users(userInfo);
+    const user = new Users(userInfo);
 
     user.save().then((response) => {
         res.send({result: "Registered Successfully!"+response})
@@ -29,7 +29,7 @@ router.post('/login', async (req, res) => {
     const userInfo = req.body;
 
     //check email
-    const user = await users.findOne({email: userInfo.email});
+    const user = await Users.findOne({email: userInfo.email});
 
     if(!user) {
         res.send({message: "Invalid email or password!"});
@@ -102,16 +102,60 @@ router.post('/logout',(req,res)=>{
 
 // ------------------------------Add CV
 router.post('/addcv',verifyToken,(req,res) => {
-    const id = req.body.id
     const cv = req.body.cv
-    users.updateOne({_id:id},{$set:{cv}})
-    .then( data => {
-        res.send({ result:"CV Added"})
-    }).catch( e=>{
-        res.send({ error:e.message})
+    console.log('~~cv add route~~',)
+    const cvAdded = new Cv(cv)
+    cvAdded.save().then( data => {
+        res.send({result:data})
+    }).catch( e => {
+        res.send({error:e.message})
     })
 })
 
 // ---------------------------------end
 
+
+
+// ------------------------------------------update-cv
+router.post('/updatecv',verifyToken,( req,res ) => {
+    const id = req.body.cv._id
+    const cv = req.body.cv
+
+    Cv.updateOne({_id:id},{$set:cv})
+    .then( data => {
+        res.send({result:data})
+    }).catch( e => {
+        res.send({error:e.message})
+    })
+})
+
+// ------------my cv
+router.get('/mycv',verifyToken,(req,res) => {
+    const id = req.headers.id
+    Cv.findOne({_id:id})
+    .then( data => {
+        res.send({result:data})
+    }).catch( e => {
+        res.send({error:e.message})
+    })
+})
+
+// --------------end
+
+
+
+// --------
+
+// ---------------------------------Users count
+
+router.get('/countusers',verifyToken,(req,res)=>{
+    Users.countDocuments({type:"Student"}).then( data => {
+        console.log('count',data)
+        res.send({result:data})
+    }).catch( e => {
+        res.send({error:e.message})
+    })
+})
+
+// -------------++++++++++++++
 module.exports = router;

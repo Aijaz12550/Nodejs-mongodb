@@ -21,7 +21,6 @@ const CompanySchema = new Schema({
 // ---------------------------JOBS SCHEMA------------------
 
 const JobSchema = new Schema({
-   
         
             timestamp:String,
             cId:String,
@@ -35,20 +34,51 @@ const JobSchema = new Schema({
             job_responsibility:String,
  
         applications:[{
-            applicant_id:String,
-            status:String,
+            type:Schema.Types.ObjectId,
+            ref:'Application'
         }],
 
-        actions:[
-            {_id:Schema.Types.ObjectId,action:Boolean}
-        ],
+        actions:[{
+            type:Schema.Types.ObjectId,
+            ref:'Action'
+        }],
 
         hired:[{_id:String,timestamp:String}]
 
  
 })
 
+// ----end----
+
+
+// --------------------------------------application schema---
+
+const Application_Schema = mongoose.Schema({
+    applicant_id:{
+        type:Schema.Types.ObjectId,
+        ref:'Users'
+    },
+    company_id :Schema.Types.ObjectId,
+    job_id:Schema.Types.ObjectId,
+    status:String,
+})
+
+// --end----------
+
+// ----------action schema----
+const Action_Schema = mongoose.Schema({
+    user_id:Schema.Types.ObjectId,
+    job_id:Schema.Types.ObjectId,
+    action:Boolean
+})
+// -------end
+
+
+
+
+const Action = mongoose.model('Action',Action_Schema)
+const Application = mongoose.model("Application", Application_Schema)
 const Jobs = mongoose.model('Jobs',JobSchema)
 const Company = mongoose.model('Company', CompanySchema);
 
-module.exports = {Company,Jobs};
+module.exports = {Company,Jobs,Application,Action};
